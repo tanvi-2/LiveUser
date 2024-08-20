@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Form</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #e0f7fa;
+        color: #444;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #00796b;
+        border-bottom: 2px solid #00796b;
+        padding-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: bold;
+        color: #00796b;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 14px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #00796b;
+        box-shadow: 0 0 5px rgba(0, 121, 107, 0.2);
+        outline: none;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #00796b;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      #errorMessages {
+        color: #d32f2f;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">User Form</h2>
+      <form id="userForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            pattern="[A-Za-z]+"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            pattern="[A-Za-z]+"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="mobileNo">Mobile No</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mobileNo"
+            name="mobileNo"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="emailId">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="emailId"
+            name="emailId"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            name="street"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            name="city"
+            pattern="[A-Za-z]+"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input
+            type="text"
+            class="form-control"
+            id="state"
+            name="state"
+            pattern="[A-Za-z]+"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            name="country"
+            pattern="[A-Za-z]+"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="loginId">Login ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="loginId"
+            name="loginId"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+      <div id="errorMessages" class="error mt-3"></div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#userForm").on("submit", function (event) {
+          event.preventDefault();
+          const formData = {
+            firstName: $('input[name="firstName"]').val(),
+            lastName: $('input[name="lastName"]').val(),
+            mobileNo: $('input[name="mobileNo"]').val(),
+            emailId: $('input[name="emailId"]').val(),
+            address: {
+              street: $('input[name="street"]').val(),
+              city: $('input[name="city"]').val(),
+              state: $('input[name="state"]').val(),
+              country: $('input[name="country"]').val(),
+            },
+            loginId: $('input[name="loginId"]').val(),
+            password: $('input[name="password"]').val(),
+          };
+          $.ajax({
+            type: "POST",
+            url: "/api/users",
+            data: JSON.stringify(formData),
+            contentType: "application/json",
+            success: function (response) {
+              const user = {
+                emailId: response.emailId,
+                name: `${response.firstName} ${response.lastName}`,
+              };
+              localStorage.setItem("live_user", JSON.stringify(user));
+              window.location.href = "/display";
+            },
+            error: function (err) {
+              $("#errorMessages").empty();
+              try {
+                const response = JSON.parse(err.responseText);
+                if (response.errors) {
+                  for (const field in response.errors) {
+                    $("#errorMessages").append(
+                      `<p>${field}: ${response.errors[field]}</p>`
+                    );
+                  }
+                } else {
+                  $("#errorMessages").append(
+                    `<p>An unknown error occurred.</p>`
+                  );
+                }
+              } catch (e) {
+                $("#errorMessages").append(`<p>An unknown error occurred.</p>`);
+              }
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
