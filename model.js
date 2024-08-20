@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
      },
      emailId: {
           type: String,
-          required: ["Email is required"],
+          required: [true,"Email is required"],
           
      },
      address: {
@@ -89,8 +89,6 @@ const userSchema = new mongoose.Schema({
                "Password must be at least 6 characters, include one uppercase letter, one lowercase letter, one number, and one special character",
           ],
      },
-     creationTime: { type: Date, default: Date.now },
-     lastUpdatedOn: { type: Date, default: Date.now },
 });
 
 userSchema.pre('save', function (next) {
