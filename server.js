@@ -8,6 +8,7 @@ const http = require("http");
 const socketIO = require("socket.io");
 require("dotenv").config();
 
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 let usersInRoom = {};
+
+
 
 io.on("connection", (socket) => {
      socket.on("joinRoom", (user) => {
